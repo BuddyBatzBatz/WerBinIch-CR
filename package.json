@@ -1,0 +1,21 @@
+{
+  "name": "werbinich-cr",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/BuddyBatzBatz/WerBinIch-CR.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "type": "commonjs",
+  "bugs": {
+    "url": "https://github.com/BuddyBatzBatz/WerBinIch-CR/issues"
+  },
+  "homepage": "https://github.com/BuddyBatzBatz/WerBinIch-CR#readme"
+}

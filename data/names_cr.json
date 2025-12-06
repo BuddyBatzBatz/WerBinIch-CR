@@ -1,0 +1,12 @@
+[
+  {"id": "1", "name": "Skelette", "image": "/img/1.webp"},
+  {"id": "2", "name": "Feuergeist", "image": "/img/2.webp"},
+  {"id": "3", "name": "Elektrogeist", "image": "/img/3.webp"},
+  {"id": "4", "name": "Eisgeist", "image": "/img/4.webp"},
+  {"id": "5", "name": "Heilungsgeist", "image": "/img/5.webp"},
+  {"id": "6", "name": "Spiegel", "image": "/img/6.webp"},
+  {"id": "7", "name": "Kobolde", "image": "/img/7.webp"},
+  {"id": "8", "name": "Speerkobolde", "image": "/img/8.webp"},
+  {"id": "9", "name": "Bomber", "image": "/img/9.webp"},
+  {"id": "10", "name": "Fledermäuse", "image": "/img/10.webp"}
+]
