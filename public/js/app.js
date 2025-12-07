@@ -4,6 +4,7 @@
 const DATA_URL = "/data/names_cr.json";
 
 let persons = []; // Hier speichern wir die geladenen Namen
+let players = [];  // Hier speichern wir später jeden Spieler
 
 // --------------------------------------------------
 // 2) JSON von Server laden
@@ -41,11 +42,75 @@ function showRandomPerson() {
 }
 
 // --------------------------------------------------
-// 4) Button-Klick aktivieren
+// 4) Starte das Spiel durch Auswahl der Spieleranzahl + Button drücken
 // --------------------------------------------------
-document.getElementById("randomBtn").addEventListener("click", showRandomPerson);
+function startGame() {
+    const count = parseInt(document.getElementById("playerCount").value);
+
+    players = [];  // Reset
+
+    for (let i = 1; i <= count; i++) {
+    const randomPerson = getRandomPerson();
+
+    players.push({
+        id: i,
+        name: "Spieler " + i,
+        randomName: randomPerson.name,
+        randomImage: randomPerson.image
+    });
+}
+
+    renderPlayerButtons();
+}
 
 // --------------------------------------------------
-// 5) Daten laden, sobald die Seite geöffnet wird
+// 4) Zufällige CR-Karte aus Datenbank wählen
+// --------------------------------------------------
+function getRandomName() {
+    return persons[Math.floor(Math.random() * persons.length)];
+}
+
+// --------------------------------------------------
+// 4) Buttons damit man auswählen kann, wer gerade dran ist
+// --------------------------------------------------
+function renderPlayerButtons() {
+    const area = document.getElementById("result");
+    area.innerHTML = "<h2>Wer hält das Handy?</h2>";
+
+    players.forEach(p => {
+        const btn = document.createElement("button");
+        btn.textContent = p.name;
+        btn.addEventListener("click", () => showOtherPlayers(p.id));
+        area.appendChild(btn);
+    });
+}
+
+// --------------------------------------------------
+// 4) Funktion durch welche nur Namen+Bild von Spielern angezeigt wird, welche man selber nicht ist
+// --------------------------------------------------
+function showOtherPlayers(activeId) {
+    const area = document.getElementById("result");
+    area.innerHTML = `<h2>Du bist Spieler ${activeId}</h2>`;
+
+    players
+        .filter(p => p.id !== activeId)
+        .forEach(p => {
+            const div = document.createElement("div");
+            div.innerHTML = `
+                <h3>${p.randomName}</h3>
+                <img src="${p.randomImage}" style="max-width:150px">
+            `;
+            area.appendChild(div);
+        });
+}
+
+// --------------------------------------------------
+// 5) Button-Klicks aktivieren
+// --------------------------------------------------
+document.getElementById("randomBtn").addEventListener("click", showRandomPerson);
+document.getElementById("startBtn").addEventListener("click", startGame);
+
+// --------------------------------------------------
+// 6) Daten laden, sobald die Seite geöffnet wird
 // --------------------------------------------------
 loadData();
