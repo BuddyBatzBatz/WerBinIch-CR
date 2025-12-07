@@ -46,6 +46,7 @@ function showRandomPerson() {
 // --------------------------------------------------
 function startGame() {
     const count = parseInt(document.getElementById("playerCount").value);
+    console.log("Spiel startet mit " + count + " Spielern!");
 
     players = [];  // Reset
 
@@ -74,6 +75,7 @@ function getRandomName() {
 // 4) Buttons damit man auswählen kann, wer gerade dran ist
 // --------------------------------------------------
 function renderPlayerButtons() {
+    console.log("renderPlayerButtons() wird ausgeführt!");
     const area = document.getElementById("result");
     area.innerHTML = "<h2>Wer hält das Handy?</h2>";
 
@@ -107,7 +109,7 @@ function showOtherPlayers(activeId) {
 // --------------------------------------------------
 // 5) Button-Klicks aktivieren
 // --------------------------------------------------
-document.getElementById("randomBtn").addEventListener("click", showRandomPerson);
+//document.getElementById("randomBtn").addEventListener("click", showRandomPerson);
 document.getElementById("startBtn").addEventListener("click", startGame);
 
 // --------------------------------------------------
