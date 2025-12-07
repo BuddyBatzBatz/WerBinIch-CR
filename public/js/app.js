@@ -90,7 +90,7 @@ function renderPlayerButtons() {
 // --------------------------------------------------
 // 4) Funktion durch welche nur Namen+Bild von Spielern angezeigt wird, welche man selber nicht ist
 // --------------------------------------------------
-function showOtherPlayers(activeId) {
+function showOtherPlayersOld(activeId) {
     const area = document.getElementById("result");
     area.innerHTML = `<h2>Du bist Spieler ${activeId}</h2>`;
 
@@ -105,12 +105,45 @@ function showOtherPlayers(activeId) {
             area.appendChild(div);
         });
 }
+function showOtherPlayers(currentPlayerId) {
+    const container = document.getElementById("result");
+    container.innerHTML = ""; // alles löschen
+
+    players.forEach(player => {
+        if (player.id !== currentPlayerId) {
+            const block = document.createElement("div");
+            block.classList.add("player-block");
+
+            block.innerHTML = `
+                <h3>Spieler ${player.id} ist:</h3>
+                <p>${player.randomName}</p>
+                <img src="${player.randomImage}" style="max-width:150px;">
+            `;
+
+            container.appendChild(block);
+        }
+    });
+    document.getElementById("resetBtn").style.display = "block";
+    document.getElementById("choosePlayer").style.display = "none";
+}
+
+// --------------------------------------------------
+// 5) Wenn man sich angeguckt hat was die anderen Spieler sind und das handy weitergegeben wird
+// --------------------------------------------------
+function resetView() {
+    document.getElementById("result").innerHTML = "";
+    document.getElementById("resetBtn").style.display = "none";
+    document.getElementById("choosePlayer").style.display = "block";
+}
+
 
 // --------------------------------------------------
 // 5) Button-Klicks aktivieren
 // --------------------------------------------------
 //document.getElementById("randomBtn").addEventListener("click", showRandomPerson);
 document.getElementById("startBtn").addEventListener("click", startGame);
+document.getElementById("resetBtn").addEventListener("click", resetView);
+document.getElementById("resetBtn").style.display = "none";
 
 // --------------------------------------------------
 // 6) Daten laden, sobald die Seite geöffnet wird
