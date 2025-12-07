@@ -67,7 +67,7 @@ function startGame() {
 // --------------------------------------------------
 // 4) Zufällige CR-Karte aus Datenbank wählen
 // --------------------------------------------------
-function getRandomName() {
+function getRandomPerson() {
     return persons[Math.floor(Math.random() * persons.length)];
 }
 
