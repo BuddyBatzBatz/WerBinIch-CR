@@ -1,67 +1,51 @@
-// URL zu deiner JSON-Datei mit den Personen
-const DATA_URL = "https://wer-bin-ich-mx8i3xu2y-buddybatzbatzs-projects.vercel.app/data/names_cr.json";
+// --------------------------------------------------
+// 1) Daten laden (URL deiner JSON)
+// --------------------------------------------------
+const DATA_URL = "/data/names_cr.json";
 
-// Hier wird später die Liste gespeichert
-let people = [];
+let persons = []; // Hier speichern wir die geladenen Namen
 
-/**
- * Lädt die JSON-Datei vom Server
- * Wird direkt beim Start ausgeführt
- */
+// --------------------------------------------------
+// 2) JSON von Server laden
+// --------------------------------------------------
 async function loadData() {
     try {
-        const response = await fetch(DATA_URL);
-
-        // Wenn ein Fehler kommt (z.B. Datei nicht gefunden)
-        if (!response.ok) {
-            throw new Error("Fehler beim Laden der JSON-Datei");
-        }
-
-        // JSON in ein JS-Objekt umwandeln
-        people = await response.json();
-
-        console.log("Daten geladen:", people);
+        const response = await fetch(DATA_URL); // Daten holen
+        persons = await response.json();        // JSON in JS-Objekt umwandeln
+        console.log("Daten geladen:", persons);
     } catch (error) {
-        console.error("Laden fehlgeschlagen:", error);
+        console.error("Fehler beim Laden:", error);
     }
 }
 
-/**
- * Wählt eine zufällige Person aus der geladenen Liste
- * Gibt ein einzelnes Objekt zurück
- */
-function getRandomPerson() {
-    const index = Math.floor(Math.random() * people.length);
-    return people[index];
-}
-
-/**
- * Zeigt die zufällige Person im HTML an
- */
+// --------------------------------------------------
+// 3) Zufallsperson auswählen
+// --------------------------------------------------
 function showRandomPerson() {
-    const person = getRandomPerson();
+    if (persons.length === 0) {
+        console.warn("Keine Daten geladen!");
+        return;
+    }
 
-    if (!person) return;
+    const randomIndex = Math.floor(Math.random() * persons.length);
+    const person = persons[randomIndex];
 
-    // Elemente auswählen
+    // HTML-Elemente holen
     const nameEl = document.getElementById("name");
-    const imageEl = document.getElementById("image");
+    const imgEl = document.getElementById("image");
 
-    // Name einsetzen
+    // Inhalte setzen
     nameEl.textContent = person.name;
-
-    // Bild setzen
-    imageEl.src = person.img;
-    imageEl.style.display = "block";
+    imgEl.src = person.image;
+    imgEl.style.display = "block"; // Bild anzeigen
 }
 
-/**
- * Button-Klick verbinden
- */
-function setupButton() {
-    document.getElementById("randomBtn").addEventListener("click", showRandomPerson);
-}
+// --------------------------------------------------
+// 4) Button-Klick aktivieren
+// --------------------------------------------------
+document.getElementById("randomBtn").addEventListener("click", showRandomPerson);
 
-// Beim Laden der Seite alles initialisieren
+// --------------------------------------------------
+// 5) Daten laden, sobald die Seite geöffnet wird
+// --------------------------------------------------
 loadData();
-setupButton();
